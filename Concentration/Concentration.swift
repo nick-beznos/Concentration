@@ -13,6 +13,8 @@ class Concentration {
     var indexOfOneAndOnlyFaceUpCard: Int?
     
     func chooseCard(at index: Int) {
+        
+        
         if !cards[index].isMatched{
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 if cards[matchIndex].identifier == cards[index].identifier {
@@ -35,8 +37,8 @@ class Concentration {
         for _ in 1..<numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
+            cards.shuffle() // TODO: Shuffle the cards
         }
-        // TODO: Shuffle the cards
-        //cards.shuffle()
+        
     }
 }
