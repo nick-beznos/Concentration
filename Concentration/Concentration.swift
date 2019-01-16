@@ -34,7 +34,7 @@ class Concentration {
         }
     }
     init (numberOfPairsOfCards: Int){
-        for _ in 1..<numberOfPairsOfCards {
+        for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
             cards.shuffle() // TODO: Shuffle the cards
