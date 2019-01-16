@@ -15,13 +15,11 @@ class Concentration {
     var flipCount = 0
     
     func chooseCard(at index: Int) {
-        if !cards[index].isMatched {
-            flipCount += 1
-        }
-        
         
         if cards[index].isMatched {
             return
+        } else {
+             flipCount += 1
         }
         
         
@@ -59,7 +57,7 @@ class Concentration {
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
-            cards.shuffle() // TODO: Shuffle the cards
+            cards.shuffle()
         }
         
     }
