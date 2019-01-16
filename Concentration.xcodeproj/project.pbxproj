@@ -26,6 +26,7 @@
 		28884ED221E7414300F0A40C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28884ED821E9064600F0A40C /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		28884EDA21E9149800F0A40C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		28E5C3C821EF788600B49849 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +44,7 @@
 			isa = PBXGroup;
 			children = (
 				28884EC521E7414100F0A40C /* Concentration */,
+				28E5C3C721EF4CE500B49849 /* Support files */,
 				28884EC421E7414100F0A40C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,16 +60,24 @@
 		28884EC521E7414100F0A40C /* Concentration */ = {
 			isa = PBXGroup;
 			children = (
-				28884EC621E7414100F0A40C /* AppDelegate.swift */,
 				28884EC821E7414100F0A40C /* ViewController.swift */,
 				28884ECA21E7414100F0A40C /* Main.storyboard */,
 				28884ED821E9064600F0A40C /* Concentration.swift */,
 				28884EDA21E9149800F0A40C /* Card.swift */,
-				28884ECD21E7414300F0A40C /* Assets.xcassets */,
-				28884ECF21E7414300F0A40C /* LaunchScreen.storyboard */,
-				28884ED221E7414300F0A40C /* Info.plist */,
 			);
 			path = Concentration;
+			sourceTree = "<group>";
+		};
+		28E5C3C721EF4CE500B49849 /* Support files */ = {
+			isa = PBXGroup;
+			children = (
+				28E5C3C821EF788600B49849 /* MyPlayground.playground */,
+				28884ECF21E7414300F0A40C /* LaunchScreen.storyboard */,
+				28884ECD21E7414300F0A40C /* Assets.xcassets */,
+				28884EC621E7414100F0A40C /* AppDelegate.swift */,
+				28884ED221E7414300F0A40C /* Info.plist */,
+			);
+			path = "Support files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,7 +302,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6T39VAFGL2;
-				INFOPLIST_FILE = Concentration/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Support files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +320,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6T39VAFGL2;
-				INFOPLIST_FILE = Concentration/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Support files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

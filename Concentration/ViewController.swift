@@ -11,16 +11,15 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
-    var flipCount = 0 { didSet { flipCountLabel.text = "Flips: \(flipCount)" }}
-    var score = 0 { didSet { scoreLabel.text = "Score: \(score)" }}
+//    var flipCount = 0 { didSet { flipCountLabel.text = "Flips: \(flipCount)" }}
+//    var score = 0 { didSet { scoreLabel.text = "Score: \(score)" }}
     
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     
-    @IBAction func newGameButton(_ sender: UIButton) { newGame() }
+    @IBAction func touchNewGame(_ sender: UIButton) { newGame() }
     @IBAction func touchCard(_ sender: UIButton) {
-        flipCount += 1
         if let cardNumber = cardButtons.index(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -30,7 +29,9 @@ class ViewController: UIViewController {
     }
     
     func updateViewFromModel() {
-        gameLoop: for index in cardButtons.indices {
+        scoreLabel.text = "Score: \(game.score)"
+        flipCountLabel.text = "Flips: \(game.flipCount)"
+        for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
             if card.isFaceUp {
@@ -40,18 +41,14 @@ class ViewController: UIViewController {
                 button.setTitle("", for: UIControl.State.normal)
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.9714247993, blue: 0, alpha: 0) : #colorLiteral(red: 1, green: 0.9714247993, blue: 0, alpha: 1)
             }
-            if card.isMatched {
-                score += 2
-                continue gameLoop
-            } else {
-                score -= 1
-                continue gameLoop
-            }
         }
     }
 
     var emojiChoises = [String]()
+    var themes : [[String]] = [["😁", "😍", "🧐", "☹️", "😤", "😱", "🤔", "🥴", "🤢"], ["🐶", "🐼", "🐵", "🐴", "🐰", "🐻", "🐮", "🐷", "🐔"], ["🍏", "🍎", "🍐", "🍋", "🥥", "🍓", "🍉", "🥝", "🥭"], ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🏉", "🥏", "🎱"], ["🚗", "🚕", "🏍", "🚌", "🚜", "🏎", "🚓", "🚑", "🚒"]]
     var emoji = [Int:String]()
+    
+    
     
     func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoises.count > 0 {
@@ -62,9 +59,10 @@ class ViewController: UIViewController {
     }
     
     func newGame() {
-        flipCount = 0
-        score = 0
-        let themeIndex = Int(arc4random_uniform(UInt32(5)))
+        game.flipCount = 0
+        game.score = 0
+        let themeIndex = Int(arc4random_uniform(UInt32(themes.count)))
+        emojiChoises = themes[themeIndex]
 
         for index in cardButtons.indices {
             let button = cardButtons[index]
@@ -74,20 +72,10 @@ class ViewController: UIViewController {
             button.setTitle("", for: UIControl.State.normal)
         }
         
-        switch themeIndex {
-        case 0: emojiChoises = ["😁", "😍", "🧐", "☹️", "😤", "😱", "🤔", "🥴", "🤢"]
-        case 1: emojiChoises = ["🐶", "🐼", "🐵", "🐴", "🐰", "🐻", "🐮", "🐷", "🐔"]
-        case 2: emojiChoises = ["🍏", "🍎", "🍐", "🍋", "🥥", "🍓", "🍉", "🥝", "🥭"]
-        case 3: emojiChoises = ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🏉", "🥏", "🎱"]
-        case 4: emojiChoises = ["🚗", "🚕", "🏍", "🚌", "🚜", "🏎", "🚓", "🚑", "🚒"]
-        case 5: emojiChoises = ["🧲", "💎", "🛠", "🧨", "🗝", "🔒", "📎", "📚", "💡"]
-            
-        default:
-            emojiChoises = ["😁", "😍", "🧐", "☹️", "😤", "😱", "🤔", "🥴", "🤢"]
-            
-        }
+        
     }
     override func viewDidLoad() {
+        super.viewDidLoad()
         newGame()
     }
 }
