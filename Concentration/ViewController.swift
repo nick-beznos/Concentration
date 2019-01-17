@@ -9,8 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    lazy var numberOfPairsOfCards = (cardButtons.count + 1) / 2
+    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
 
     
     @IBOutlet var cardButtons: [UIButton]!
@@ -49,14 +49,12 @@ class ViewController: UIViewController {
                   ["🍏", "🍎", "🍐", "🍋", "🥥", "🍓", "🍉", "🥝", "🥭"],
                   ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🏉", "🥏", "🎱"],
                   ["🚗", "🚕", "🏍", "🚌", "🚜", "🏎", "🚓", "🚑", "🚒"]]
+    let backGrounds = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+                       #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1),
+                       #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1),
+                       #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1),
+                       #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)]
     var emoji = [Int:String]()
-    
-    
-//    1) Обнулить счёт
-//    2) Обнулить ходы
-//    3) вернуть оранжевый бекграунд
-//    4) присвоить каждой кнопке тайтл из нового массива
-//    5)
     
     func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoises.count > 0 {
@@ -67,8 +65,11 @@ class ViewController: UIViewController {
     }
     
     func newGame() {
-        emojiChoises = themes[Int(arc4random_uniform(UInt32(themes.count)))]
-        game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        let themeIndex = Int(arc4random_uniform(UInt32(themes.count)))
+        
+        emojiChoises = themes[themeIndex]
+        view.backgroundColor = backGrounds[themeIndex]
+        game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
         updateViewFromModel()
     }
     override func viewDidLoad() {
