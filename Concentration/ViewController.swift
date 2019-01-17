@@ -11,8 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
-//    var flipCount = 0 { didSet { flipCountLabel.text = "Flips: \(flipCount)" }}
-//    var score = 0 { didSet { scoreLabel.text = "Score: \(score)" }}
+
     
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var flipCountLabel: UILabel!
@@ -53,7 +52,11 @@ class ViewController: UIViewController {
     var emoji = [Int:String]()
     
     
-    
+//    1) Обнулить счёт
+//    2) Обнулить ходы
+//    3) вернуть оранжевый бекграунд
+//    4) присвоить каждой кнопке тайтл из нового массива
+//    5)
     
     func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoises.count > 0 {
@@ -64,22 +67,9 @@ class ViewController: UIViewController {
     }
     
     func newGame() {
-        game.flipCount = 0
-        game.score = 0
-        
-        let themeIndex = Int(arc4random_uniform(UInt32(themes.count)))
-        emojiChoises = themes[themeIndex]
-
-        for index in cardButtons.indices {
-            let button = cardButtons[index]
-            var card = game.cards[index]
-            card.isFaceUp = false
-            //button.state =
-            button.backgroundColor = #colorLiteral(red: 1, green: 0.9714247993, blue: 0, alpha: 1)
-            button.setTitle("", for: UIControl.State.normal)
-        }
-        
-        
+        emojiChoises = themes[Int(arc4random_uniform(UInt32(themes.count)))]
+        game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        updateViewFromModel()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
