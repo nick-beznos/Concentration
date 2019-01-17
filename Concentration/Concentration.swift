@@ -59,7 +59,6 @@ class Concentration {
             cards += [card, card]
             for _ in cards {
                 cards.append(cards.remove(at: Int(arc4random_uniform(UInt32(cards.count)))))
-                // кидаю в конец случайную карту
             }
         }
         
