@@ -68,6 +68,7 @@ class ViewController: UIViewController {
             let button = cardButtons[index]
             var card = game.cards[index]
             card.isFaceUp = false
+            //button.state =
             button.backgroundColor = #colorLiteral(red: 1, green: 0.9714247993, blue: 0, alpha: 1)
             button.setTitle("", for: UIControl.State.normal)
         }
