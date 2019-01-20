@@ -10,8 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     lazy var numberOfPairsOfCards = (cardButtons.count + 1) / 2
-    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
-    
+    var game: Concentration!
     
     var backColor = #colorLiteral(red: 1, green: 0.9714247993, blue: 0, alpha: 1)
 
