@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         view.backgroundColor = backGrounds[themeIndex][0]
         backColor = backGrounds[themeIndex][1]
         
-        if view.backgroundColor == #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) {
+        if view.backgroundColor == #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) || view.backgroundColor == #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1){
             UIApplication.shared.statusBarStyle = .lightContent
             setNeedsStatusBarAppearanceUpdate()
         } else {

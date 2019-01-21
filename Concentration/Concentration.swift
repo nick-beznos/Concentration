@@ -10,7 +10,7 @@ import Foundation
 
 class Concentration {
     var cards = [Card] ()
-    var indexOfOneAndOnlyFaceUpCard: Int? = 0
+    var indexOfOneAndOnlyFaceUpCard: Int? 
     var score = 0
     var flipCount = 0
     
