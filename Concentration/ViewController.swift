@@ -9,17 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy var numberOfPairsOfCards = (cardButtons.count + 1) / 2
-    var game: Concentration!
+    var numberOfPairsOfCards: Int{
+            return (cardButtons.count + 1) / 2
+    }
+    
+    private var game: Concentration!
     
     var backColor = #colorLiteral(red: 1, green: 0.9714247993, blue: 0, alpha: 1)
 
-    @IBOutlet var cardButtons: [UIButton]!
-    @IBOutlet weak var flipCountLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet private var cardButtons: [UIButton]!
+    @IBOutlet private weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var scoreLabel: UILabel!
     
-    @IBAction func touchNewGame(_ sender: UIButton) { newGame() }
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchNewGame(_ sender: UIButton) { newGame() }
+    @IBAction private func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.index(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -29,7 +32,7 @@ class ViewController: UIViewController {
     }
     
     
-    func updateViewFromModel() {
+    private func updateViewFromModel() {
         scoreLabel.text = "Score: \(game.score)"
         flipCountLabel.text = "Flips: \(game.flipCount)"
         for index in cardButtons.indices {
@@ -60,13 +63,12 @@ class ViewController: UIViewController {
     
     func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoises.count > 0 {
-             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoises.count)))
-            emoji[card.identifier] = emojiChoises.remove(at: randomIndex)
+            emoji[card.identifier] = emojiChoises.remove(at: emojiChoises.count.arc4random)
         }
         return emoji[card.identifier] ?? "?"
     }
     
-    func newGame() {
+    private func newGame() {
         let themeIndex = Int(arc4random_uniform(UInt32(themes.count)))
         
         emojiChoises = themes[themeIndex]
@@ -91,3 +93,14 @@ class ViewController: UIViewController {
     }
 }
 
+extension Int {
+    var arc4random: Int{
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(abs(self))))
+        } else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self))))
+        } else {
+            return 0
+        }
+    }
+}
