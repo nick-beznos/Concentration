@@ -31,6 +31,17 @@ class ViewController: UIViewController {
         }
     }
     
+//    private func updateScoreAndFlipLabels() {
+////        let attributes: [NSAttributedString.Key: Any] = [
+////        .strokeWidth = 5.0,
+////        .strokeColor = backColor]
+//
+//        let attributes: [NSAttributedString.Key: Any] = [
+//            NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeWidth.rawValue): 5.0,
+//            NSAttributedString.Key(rawValue: NSAttributedString.Key.strokeColor.rawValue): backColor]
+//        let attributedFlipCount = NSAttributedString(string: flipCountLabel.text!, attributes: attributes)
+//        let attributedScore = NSAttributedString(string: scoreLabel.text!, attributes: attributes)
+//    }
     
     private func updateViewFromModel() {
         scoreLabel.text = "Score: \(game.score)"
@@ -48,24 +59,21 @@ class ViewController: UIViewController {
         }
     }
 
-    var emojiChoises = [String]()
-    let themes = [["😁", "😍", "🧐", "☹️", "😤", "😱", "🤔", "🥴", "🤢"],
-                  ["🐶", "🐼", "🐵", "🐴", "🐰", "🐻", "🐮", "🐷", "🐔"],
-                  ["🍏", "🍎", "🍐", "🍋", "🥥", "🍓", "🍉", "🥝", "🥭"],
-                  ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🏉", "🥏", "🎱"],
-                  ["🚗", "🚕", "🏍", "🚌", "🚜", "🏎", "🚓", "🚑", "🚒"]]
+    var emojiChoises = String()
+    let themes = ["😁😍🧐☹️😤😱🤔🥴🤢", "🐶🐼🐵🐴🐰🐻🐮🐷🐔", "🍏🍎🍐🍋🥥🍓🍉🥝🥭", "⚽️🏀🏈⚾️🎾🏐🏉🥏🎱", "🚗🚕🏍🚌🚜🏎🚓🚑🚒"]
     let backGrounds = [[#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)],
                        [#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1)],
                        [#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1), #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)],
                        [#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)],
                        [#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), #colorLiteral(red: 0.1449589431, green: 0.148973316, blue: 0.1531212926, alpha: 1)]]
-    var emoji = [Int:String]()
+    var emoji = [Card:String]()
     
     func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil, emojiChoises.count > 0 {
-            emoji[card.identifier] = emojiChoises.remove(at: emojiChoises.count.arc4random)
+        if emoji[card] == nil, emojiChoises.count > 0 {
+            let randomStringIndex = emojiChoises.index(emojiChoises.startIndex, offsetBy: emojiChoises.count.arc4random)
+            emoji[card] = String(emojiChoises.remove(at: randomStringIndex))
         }
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
     
     private func newGame() {
